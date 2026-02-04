@@ -1,0 +1,116 @@
+﻿<Window x:Class="DataToUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="BMS Monitor" Height="650" Width="850" Background="#F0F2F5">
+
+    <Window.Resources>
+        <Style x:Key="ModernButton" TargetType="Button">
+            <Setter Property="Background" Value="#6366F1"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="15,5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+             
+        </Style>
+
+         
+    </Window.Resources>
+    <Viewbox Stretch="Uniform"
+             StretchDirection="Both"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch">
+        <Grid Margin="15" Height="600" Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Background="White"
+                Padding="15"
+                CornerRadius="1" 
+                Margin="0,0,0,15">
+             
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="0,0,20,0">
+                    <Label Content="COM PORT"/>
+                    <ComboBox x:Name="ComboBoxShow"
+                              Width="180"
+                              Height="35"
+                              VerticalContentAlignment="Center"
+                              Loaded="ComboBoxItemAdd" SelectedIndex="0"/>
+                </StackPanel>
+
+                <StackPanel Margin="0,0,20,0">
+                    <Label Content="VIEW MODE"/>
+                    <ComboBox x:Name="SelectDataType"
+                              Width="180"
+                              Height="35"
+                              VerticalContentAlignment="Center"
+                              SelectedIndex="0">
+                        <ComboBoxItem Content="--Select Data--"/>
+                        <ComboBoxItem Content="Idle DataFrame"/>
+                        <ComboBoxItem Content="STD DataFrame"/>
+                        <ComboBoxItem Content="ASCII DataFrame"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <Button Content="Connect Port"
+                        Style="{StaticResource ModernButton}" 
+                        Width="120"
+                        Height="40"
+                        Margin="10,20,10,0"
+                        Click="ConnectPort"
+                        Background="#10B981"/>
+
+                <Button Content="Send Command"
+                        Style="{StaticResource ModernButton}" 
+                        Width="140"
+                        Height="40"
+                        Margin="10,20,0,0"
+                        Click="DataSendToBMS"
+                        Background="#6366F1"/>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="LIVE DATA FEED"
+                   FontSize="12"
+                   Foreground="#6B7280"
+                   Margin="5,0,0,5"/>
+
+            <Border Grid.Row="1"
+                    Background="#1E293B" 
+                    CornerRadius="10"
+                    Padding="10">
+                
+                <TextBox x:Name="TextShowBox" 
+                         Background="Transparent"
+                         Foreground="White "
+                         BorderThickness="0"
+                         FontSize="16"
+                         FontFamily="Arial"
+                         IsReadOnly="True"
+                         TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         Text="{Binding MyProperty, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+        </Grid>
+        </Grid>
+    </Viewbox>    
+</Window>
